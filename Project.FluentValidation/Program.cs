@@ -13,6 +13,11 @@ builder.Services.AddDbContext<AppDbContext>
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddFluentValidation(options=>
+{
+    options.RegisterValidatorsFromAssemblyContaining<Program>();
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
