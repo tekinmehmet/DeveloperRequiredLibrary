@@ -9,5 +9,6 @@
         public DateTime? BirthDay { get; set; }
 
         public IList<Adress>? Adresses { get; set; }
+        public GenderEnum? Gender { get; set; }
     }
 }
