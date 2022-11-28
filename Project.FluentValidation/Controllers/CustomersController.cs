@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Project.FluentValidation.FluentValidator;
 using Project.FluentValidation.Models;
 
 namespace Project.FluentValidation.Controllers
@@ -12,10 +14,11 @@ namespace Project.FluentValidation.Controllers
     public class CustomersController : Controller
     {
         private readonly AppDbContext _context;
-
-        public CustomersController(AppDbContext context)
+        //private readonly IValidator<Customer> _customervalidator;
+        public CustomersController(AppDbContext context/*,IValidator<Customer> customerValidator*/)
         {
             _context = context;
+            //_customervalidator = customerValidator;
         }
 
         // GET: Customers
@@ -53,14 +56,27 @@ namespace Project.FluentValidation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,Age,BirthDay")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Age,BirthDay,Adresses")] Customer customer)
         {
+            //CustomerValidator cv= new CustomerValidator();
+            //var result = cv.Validate(customer);
+            //var result=_customervalidator.Validate(customer);
+            //if (result.IsValid)
+            //{
+            //    _context.Add(customer);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
             if (ModelState.IsValid)
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+           
+            
+            
+
             return View(customer);
         }
 

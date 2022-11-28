@@ -9,6 +9,7 @@ namespace Project.FluentValidation.Models
 
         }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Adress> Adresses { get; set; }
 
     }
 }

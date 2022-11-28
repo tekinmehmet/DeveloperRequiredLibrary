@@ -11,6 +11,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+        
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -32,6 +33,30 @@
                 <input type="date" asp-for="BirthDay" class="form-control" />
                 <span asp-validation-for="BirthDay" class="text-danger"></span>
             </div>
+            <hr />
+            <h1>Adresler</h1>
+        
+            @for (int i = 0; i < 1; i++)
+            {
+              
+                <div class="form-group">
+                    <label asp-for="Adresses[i].ContentAdress" class="control-label"></label>
+                    <input asp-for="Adresses[i].ContentAdress" class="form-control" />
+                    <span asp-validation-for="Adresses[i].ContentAdress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresses[i].Province" class="control-label"></label>
+                    <input asp-for="Adresses[i].Province" class="form-control" />
+                    <span asp-validation-for="Adresses[i].Province" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresses[i].PostCode" class="control-label"></label>
+                    <input asp-for="Adresses[i].PostCode" class="form-control" />
+                    <span asp-validation-for="Adresses[i].PostCode" class="text-danger"></span>
+                </div>
+             
+            }
+            <br /> 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
