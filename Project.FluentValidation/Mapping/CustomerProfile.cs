@@ -8,8 +8,8 @@ namespace Project.FluentValidation.Mapping
     {
         public CustomerProfile()
         {
-            CreateMap<Customer, CustomerDto>();
-            CreateMap<CustomerDto, Customer>();
+            CreateMap<Customer, CustomerDto>().ReverseMap();
+          
         }
     }
 }
