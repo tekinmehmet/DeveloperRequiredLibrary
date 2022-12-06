@@ -12,7 +12,7 @@
         public GenderEnum? Gender { get; set; }
 
 
-        public string GetFullName()
+        public string FerreAnkastre()
         {
             return $"{Name}--{Email}--{Age}";
         }
