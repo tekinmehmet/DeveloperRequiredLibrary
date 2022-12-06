@@ -13,7 +13,7 @@ namespace Project.FluentValidation.Mapping
                 .ForMember(dest => dest.Eposta, opt => opt.MapFrom(x => x.Email))
                 .ForMember(dest => dest.Yas, opt => opt.MapFrom(x => x.Age));
             //CreateMap<Customer, CustomerDto>().ReverseMap();
-          
+
         }
     }
 }

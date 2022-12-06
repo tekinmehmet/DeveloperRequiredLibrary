@@ -27,6 +27,14 @@ namespace Project.FluentValidation.Controllers
             _mapper = mapper;
         }
 
+        [Route("MT")]
+        [HttpGet]
+        public IActionResult TekliMapping()
+        {
+            Customer customer = new Customer { Id = 20, Name = "Şamil", Email = "samil@samil.com", Age = 22, BirthDay = DateTime.Now ,Gender=GenderEnum.Erkek};
+            return Ok(_mapper.Map<CustomerDto>(customer));
+        }
+
         // GET: api/CustomersApi
         [HttpGet]
         public async Task<ActionResult<IList<CustomerDto>>> GetCustomers()

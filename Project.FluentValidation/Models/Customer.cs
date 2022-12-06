@@ -10,5 +10,11 @@
 
         public IList<Adress>? Adresses { get; set; }
         public GenderEnum? Gender { get; set; }
+
+
+        public string GetFullName()
+        {
+            return $"{Name}--{Email}--{Age}";
+        }
     }
 }
