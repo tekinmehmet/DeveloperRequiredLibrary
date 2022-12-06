@@ -31,7 +31,7 @@ namespace Project.FluentValidation.Controllers
         [HttpGet]
         public IActionResult TekliMapping()
         {
-            Customer customer = new Customer { Id = 20, Name = "Şamil", Email = "samil@samil.com", Age = 22, BirthDay = DateTime.Now ,Gender=GenderEnum.Erkek};
+            Customer customer = new Customer { Id = 20, Name = "Şamil", Email = "samil@samil.com", Age = 22, BirthDay = DateTime.Now ,Gender=GenderEnum.Erkek,CreditCard= new CreditCard { Number = "123456", ValidDate = DateTime.Now } };
             return Ok(_mapper.Map<CustomerDto>(customer));
         }
 

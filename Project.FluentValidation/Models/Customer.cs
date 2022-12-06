@@ -10,7 +10,7 @@
 
         public IList<Adress>? Adresses { get; set; }
         public GenderEnum? Gender { get; set; }
-
+        public CreditCard CreditCard { get; set; }
 
         public string FerreAnkastre()
         {
