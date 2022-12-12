@@ -12,6 +12,12 @@ namespace RateLimit.API.Controllers
         {
             return Ok(new { Id = 1, Name = "Kalem", Price = 20 });
         }
+        //api/product/Defter/20
+        [HttpGet("{name}/{price}")]
+        public IActionResult GetProduct(string name,int price)
+        {
+            return Ok(name+"//"+price);
+        }
         [HttpPost]
         public IActionResult SaveProduct()
         {
