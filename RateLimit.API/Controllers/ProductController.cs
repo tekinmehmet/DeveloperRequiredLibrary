@@ -17,5 +17,10 @@ namespace RateLimit.API.Controllers
         {
             return Ok(new { Status="Success" });
         }
+        [HttpPut]
+        public IActionResult UpdateProduct()
+        {
+            return Ok();
+        }
     }
 }

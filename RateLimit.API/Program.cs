@@ -46,6 +46,9 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 
 var app = builder.Build();
 
+var IpPolicy=app.Services.GetRequiredService<IIpPolicyStore>();
+IpPolicy.SeedAsync().Wait();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
