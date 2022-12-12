@@ -19,16 +19,19 @@ builder.Services.AddMemoryCache();//dakikakada 100 istek yapýlsýn dediðimiz zama
 #region appsettings.json içinden okuyacaðý keyleri belirleyelim.
 
 #region appsettings.json içindeki key deðerindeki ayarlarý okumak için eklenecek servis
-builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+//builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));//IP RATE LIMIT
+builder.Services.Configure<ClientRateLimitOptions>(builder.Configuration.GetSection("ClientRateLimiting"));//CLIENT RATE LIMIT
 #endregion
 #region Ýstekler için þartnameler yazaðýz a Ip adresinden istek için dakikada 100 request b Ip adresinden istek için dakikada 10 request mesela
-builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));//IP adreslerine farklý farklý þartlar atacaðýmýz yeri okumak için
+//builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));//IP adreslerine farklý farklý þartlar atacaðýmýz yeri okumak için
+builder.Services.Configure<ClientRateLimitPolicies>(builder.Configuration.GetSection("ClientRateLimitPolicies"));//Client adreslerine farklý farklý þartlar atacaðýmýz yeri okumak için
 #endregion
 
 #endregion
 
 #region Api adresi içindeki datalarý ve policy içindeki datalarý tutacaðý memorycache ekleyelim.
-builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();//AddSingleton 1 kere yüklensin demek. 
+//builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();//AddSingleton 1 kere yüklensin demek. IP RATE LIMIT
+builder.Services.AddSingleton<IClientPolicyStore, MemoryCacheClientPolicyStore>();//AddSingleton 1 kere yüklensin demek.  CLIENT RATE LIMIT
 #endregion
 
 #region Gelen istek sayýlarýný da tutmak gerekli
@@ -46,15 +49,16 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 
 var app = builder.Build();
 
-var IpPolicy=app.Services.GetRequiredService<IIpPolicyStore>();
-IpPolicy.SeedAsync().Wait();
+//var IpPolicy=app.Services.GetRequiredService<IIpPolicyStore>();
+//IpPolicy.SeedAsync().Wait();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseIpRateLimiting();
+    //app.UseIpRateLimiting(); IP RATE LIMIT
+    app.UseClientRateLimiting();
 }
 
 app.UseHttpsRedirection();
