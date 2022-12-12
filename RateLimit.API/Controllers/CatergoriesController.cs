@@ -7,6 +7,7 @@ namespace RateLimit.API.Controllers
     [ApiController]
     public class CatergoriesController : ControllerBase
     {
+        [HttpGet]
         public IActionResult GetCategory()
         {
             return Ok(new { Id = 1, Category = "Kırtasiye" });
