@@ -1,6 +1,9 @@
 using Hangfire;
+using HangFire.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IEmailSender,EmailSender>();//uygulamamnýn her yerinde IemailSender görürse Emailsender dan nesne örneði alacak.
 
 builder.Services.AddHangfire(config => config.UseSqlServerStorage(builder.Configuration.GetConnectionString("HangFireConnection")));
 builder.Services.AddHangfireServer();

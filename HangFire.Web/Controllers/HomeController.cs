@@ -1,4 +1,5 @@
-﻿using HangFire.Web.Models;
+﻿using HangFire.Web.BackroundJobs;
+using HangFire.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -27,6 +28,15 @@ namespace HangFire.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+       
+        public IActionResult SignUp()
+        {
+            //üye kayıt işlemi burada gerçekleştiriliyor.
+            //kayıt olan kullanıcının userID bilgisini al
+            FireAndForgetJobs.EmailSendToUserJob("1234","Hangfire test sitemize hoş geldiniz");
+            return View();
         }
     }
 }
