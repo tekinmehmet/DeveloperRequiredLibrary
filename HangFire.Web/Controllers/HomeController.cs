@@ -30,6 +30,34 @@ namespace HangFire.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult PictureSave()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PictureSave(IFormFile picture)
+        {
+            
+            string newFileName = string.Empty;
+
+            if (picture!=null && picture.Length>0)
+            {
+                //eklenen resimlere random isim atama
+                newFileName = Guid.NewGuid().ToString() + Path.GetExtension(picture.FileName);//get extension sadece uzantıyı alır. abc.jpg-->jpg alır.
+                //kaydedeceğimiz path belirtelim.
+                var path=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/Pictures",newFileName);
+
+                //resmi içeri alalım
+                using (var stream =  new FileStream(path,FileMode.Create))
+                {
+                    await picture.CopyToAsync(stream);
+                }
+
+                //jobı oluşturalım.
+                string jobId = BackroundJobs.DelayedJobs.AddWaterMarkJob(newFileName, "Mehmet Tekin");
+            }
+        }
        
         public IActionResult SignUp()
         {

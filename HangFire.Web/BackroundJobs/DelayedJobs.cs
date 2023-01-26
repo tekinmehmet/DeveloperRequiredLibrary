@@ -1,10 +1,18 @@
 ﻿using System.Drawing;
+using HangFire.Web.Services;
 
 namespace HangFire.Web.BackroundJobs
 {
     public class DelayedJobs
     {
-        public void ApplyWaterMark(string filename,string watermarkText)
+
+        public static string AddWaterMarkJob(string filename,string watermarkText)
+        {
+            return Hangfire.BackgroundJob.Schedule(() => ApplyWaterMark(filename, watermarkText), TimeSpan.FromSeconds(30));
+
+            
+        }
+        public static void ApplyWaterMark(string filename,string watermarkText)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/Pictures",filename);
 
