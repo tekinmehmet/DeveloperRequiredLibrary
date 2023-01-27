@@ -57,6 +57,8 @@ namespace HangFire.Web.Controllers
 
                 //jobı oluşturalım.
                 string jobId = BackroundJobs.DelayedJobs.AddWaterMarkJob(newFileName, "Mehmet Tekin");
+
+                BackroundJobs.ContinuationsJobs.WaterMarkSatatus(jobId, newFileName);
             }
             return View();
         }
