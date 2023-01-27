@@ -15,8 +15,8 @@ namespace HangFire.Web.BackroundJobs
         public static void ApplyWaterMark(string filename,string watermarkText)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/Pictures",filename);
-
-            using (var bitmap=Bitmap.FromFile(path))
+            
+            using (var bitmap = Bitmap.FromFile(path)) 
             {
                 using (Bitmap tempBitmap = new Bitmap(bitmap.Width, bitmap.Height))
                 {

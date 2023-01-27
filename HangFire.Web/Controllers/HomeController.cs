@@ -32,6 +32,7 @@ namespace HangFire.Web.Controllers
 
         public IActionResult PictureSave()
         {
+            BackroundJobs.ReccurinJobs.ReportingJobs();
             return View();
         }
 
@@ -57,6 +58,7 @@ namespace HangFire.Web.Controllers
                 //jobı oluşturalım.
                 string jobId = BackroundJobs.DelayedJobs.AddWaterMarkJob(newFileName, "Mehmet Tekin");
             }
+            return View();
         }
        
         public IActionResult SignUp()
